@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import sequelize, { testConnection as testSequelizeConnection, syncDatabase } from '../server/config/database.js';
 
 // Load environment variables
 dotenv.config();
@@ -19,20 +18,45 @@ app.use(express.json());
 // Database configuration
 const USE_SQL_DATABASE = process.env.USE_SQL_DATABASE === 'true';
 
-// Initialize database connection for serverless
+// Track database initialization
 let dbInitialized = false;
+let sequelize = null;
+
+// Initialize database connection for serverless
 async function initializeDatabase() {
   if (dbInitialized) return;
 
   if (USE_SQL_DATABASE) {
     try {
       console.log('Initializing database connection...');
-      const connected = await testSequelizeConnection();
-      if (connected) {
-        await syncDatabase(false);
-        console.log('✓ Database initialized successfully');
-        dbInitialized = true;
-      }
+
+      // Dynamic import to ensure mysql2 is loaded
+      const { default: Sequelize } = await import('sequelize');
+
+      sequelize = new Sequelize(
+        process.env.DB_NAME || 'fleet_management',
+        process.env.DB_USER || 'root',
+        process.env.DB_PASSWORD || '',
+        {
+          host: process.env.DB_HOST || 'localhost',
+          dialect: 'mysql',
+          port: process.env.DB_PORT || 3306,
+          logging: false,
+          dialectOptions: {
+            connectTimeout: 60000,
+          },
+          pool: {
+            max: 2,
+            min: 0,
+            acquire: 30000,
+            idle: 10000,
+          },
+        }
+      );
+
+      await sequelize.authenticate();
+      console.log('✓ Database initialized successfully');
+      dbInitialized = true;
     } catch (error) {
       console.error('✗ Database initialization failed:', error.message);
       // Don't throw - let the API continue and handle errors per-request
