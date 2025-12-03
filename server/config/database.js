@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import mysql2 from 'mysql2'; // Explicit import to force bundling
 
 // Load environment variables
 dotenv.config();
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'mysql',
+    dialectModule: mysql2, // Explicitly provide the dialect module
     port: process.env.DB_PORT || 3306,
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     define: {
