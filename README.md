@@ -1,4 +1,17 @@
-# Skedadel Fleet Management System
+<div align="center">
+
+![GitHub last commit](https://img.shields.io/github/last-commit/Tristan-DW/Skedadel-fleet-system?style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/Tristan-DW/Skedadel-fleet-system?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/Tristan-DW/Skedadel-fleet-system?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+
+# Skedadel-fleet-system
+
+> **Skedadel fleet system**
+
+</div>
+
+---
 
 A comprehensive fleet management platform built with React and Express, optimized for Vercel deployment.
 
@@ -93,3 +106,11 @@ MIT
 ---
 
 Built with ❤️ for modern fleet management
+
+---
+
+<div align="center">
+
+**Made with love by [Tristan Wentzel](https://github.com/Tristan-DW)**
+
+</div>
