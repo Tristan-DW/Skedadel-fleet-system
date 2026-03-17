@@ -68,7 +68,6 @@ See [VERCEL-SETUP.md](./VERCEL-SETUP.md) for detailed deployment instructions, t
 ```bash
 npm install
 
-# Start development (frontend + backend)
 npm start
 
 # Frontend only (port 3000)
@@ -109,22 +108,6 @@ MIT
 ---
 
 Built with ️ for modern fleet management
-
----
-
-<div align="center">
-
-**Made with love by [Tristan Wentzel](https://github.com/Tristan-DW)**
-
-</div>
-
----
-
-<div align="center">
-
-<sub>Built by <a href="https://github.com/Tristan-DW">Tristan Wentzel</a></sub>
-
-</div>
 
 ---
 
